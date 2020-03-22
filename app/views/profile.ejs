@@ -1,0 +1,31 @@
+<%- include('partials/header') %>
+<h2>Votre profile</h2>
+<div class="container">
+    <div class="row">
+        <div class="col--profile-img">
+            <div class="profile--img__container">
+                <% if (user.avatar) { %>
+                    <img src="" alt="Votre avatar">
+                <% } else { %>
+                    <img src="/img/no-avatar.jpeg" alt="Avatar commun">
+                <% } %>
+            </div>
+    
+        </div>
+        <div class="col--profile-infos">
+            <p class="profile-infos profile-infos--name"><%= user.firstname %> <%= user.lastname.toUpperCase() %></p> 
+            
+            <p class="profile-infos"><%= user.email %></p>
+        
+        </div>
+    </div>
+    <div class="row">
+        <p class="simple-msg">
+            
+        </p>
+    </div>
+
+</div>
+
+
+<%- include('partials/footer') %>

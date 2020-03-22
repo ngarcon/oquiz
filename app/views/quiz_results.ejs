@@ -1,0 +1,83 @@
+<%- include('partials/header') %>
+
+
+    <header class="header--quiz ">
+        <div class="container bg-white">
+            <h2><%= quiz.title %>
+                <p class="author-name">
+                    <strong >by <%= quiz.author.getFullName() %></strong>
+                </p>
+                
+            </h2>
+            <div class="tag-container">
+                <% for(let tag of tags){ %>
+                    <a 
+                    class="tag tag--<%= tag.name.toLowerCase() %>" 
+                    href="/tags/<%= tag.id %>">
+                    <%= tag.name %>
+                </a>
+                
+                <% } %>
+            </div>
+            <p class="quiz-info">
+                <strong><%= quiz.questions.length %> question(s)</strong>
+            </p>
+        </div>
+    </header>
+          
+    <div class="container bg-white question-container">
+        
+            <% for( let question of quiz.questions) { %>
+              <% let index = 1 %> 
+              <article class="col-question">
+                <header class="question-infos">
+                  <strong>Question <%= index %></strong> <strong class ="level level--<%= question.level.name.toLowerCase() %>"><%= question.level.name %> </strong>
+              </header>
+              <p class="question"><%= question.question %> </p>
+                <div>
+                  <ul>
+                    <% for(let answer of question.answers) { %>
+                      <li> 
+                        <label 
+                        for="question<%= question.id%>answer<%= answer.id %>"
+                       
+                        <% if (answer.description === question.results.goodAnswer) { %> 
+                          <%# Si la réponse courante est la bonne réponse %> 
+                          <%# Alors on l'identifie par une class bonne réponse%> 
+                          class="right-answer"
+                        <% } else { %>
+                          <%# Si la réponse courante n'est pas la bonne réponse %> 
+                          <%# Alors on on vérifie : %>
+                          <%# - que la réponse courante soit celle de l'utilisateur %>
+                          <%# - ET que la réponse utilisateur n'est pas la bonne réponse %>  
+                          <% if (question.results.userAnswer !== question.results.goodAnswer && answer.description === question.results.userAnswer) { %>       <%# Alors on l'identifie par une class mauvaise réponse %>         
+                            class="wrong-answer"
+                          <% } %>
+                        <% } %>>
+                       
+                          <input 
+                            type="radio" 
+                            name="<%= question.id%>" 
+                            id="question<%= question.id%>answer<%= answer.id %>" value="<%= answer.description %>" 
+                            disabled <%# on désactive le clic sur les checkbox %> 
+                          <% if (answer.description === question.results.userAnswer) { %>
+                            <%# si la réponse courante est celle de l'utilisateur on selectionne le bouton radio %> 
+                           checked
+          
+                          <% } %>
+                          > <%= answer.description %>
+                        </label>
+                      </li>
+                    <% } %>
+                  </ul>
+                </div>
+              </article>
+              <% index++ %> 
+            <% } %>
+            <div class="floating-msg">
+              <p>Retour à <a href="/">la liste des quiz</a></p>
+            </div>
+          
+    </div>
+
+<%- include('partials/footer') %>

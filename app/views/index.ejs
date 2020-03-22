@@ -1,0 +1,54 @@
+<%- include('partials/header') %>
+
+<div class="container bg-white">
+    <div class="row">
+        <% if (locals.user) { %>
+            <h2><%= user.firstname %>, Bienvenue sur O'Quiz </h2>
+        <% } else { %>
+            <h2> Bienvenue sur O'Quiz </h2>
+        <% } %>
+
+        <p class="intro-homepage">
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
+        </p>
+
+    </div>
+</div>
+
+<%- include('partials/tagList') %>
+
+<div class="container bg-white">
+    <div class="row">
+        <% if (locals.quizzes)  {%> 
+            
+            <% for(let quiz of quizzes){ %>
+                <article class="col-quiz">
+                    <header>
+                        <h3 class="quiz-title">
+                            <a href="/quiz/<%= quiz.id %> ">
+                                <%= quiz.title %>
+                            </a>
+                            <strong class="author-name">
+                                by <%= quiz.author.getFullName()%>
+                            </strong>
+                        </h3>
+                    </header>
+                    <p><%= quiz.description %></p>
+                    <div class="tag-container">
+                        <% for(let tag of quiz.tags){ %>
+                            <a 
+                            class="tag tag--<%= tag.name.toLowerCase() %>" 
+                            href="/tags/<%= tag.id %>">
+                                <%= tag.name %>
+                            </a>
+                        
+                        <% } %>
+                    </div>
+                </article>
+                
+            <% } %><%# / for %> 
+        <% } %> <%# / iF %> 
+    </div>
+</div><%# /div.row %> 
+
+<%- include('partials/footer') %>

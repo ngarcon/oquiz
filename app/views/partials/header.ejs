@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    
+    <!-- Reset CSS -->
+    <link href="/css/reset.css"  rel="stylesheet">
+    
+    <!-- Really beautiful CSS -->
+    <link href="/css/style.css"  rel="stylesheet">
+    
+    <title>O'Quiz</title>
+</head>
+<body>
+    <header class="header">
+        <div class="container header__container">
+            <nav class="header__nav">
+                <ul class="nav--logo">
+                    <li>
+                        <a href="/">
+                            <h1>O'Quiz</h1>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav--items">
+                    <li>
+                        <a href="/">Accueil</a>
+                    </li>
+                   
+                    <% if (locals.user) { %>
+                        <% if (locals.user.role === "admin") { %>
+                            <li>
+                                <a href="/admin">Admin</a>
+                            </li>
+                        <% } %>
+                        <li>
+                            <a href="/profile">Mon compte</a>
+                        </li>
+                        <li>
+                            <a href="/logout">Déconnexion</a>
+                        </li>
+
+                    <% } else { %>
+                        
+                        <li>
+                            <a href="/signup">S'inscrire</a>
+                        </li>
+                        <li>
+                            <a href="/login">Se connecter</a>
+                        </li>
+                    <% } %>
+                
+                    
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="main">

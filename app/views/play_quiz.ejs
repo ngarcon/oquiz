@@ -1,0 +1,65 @@
+<%- include('partials/header') %>
+
+
+    <header class="header--quiz ">
+        <div class="container bg-white">
+            <h2><%= quiz.title %>
+                <p class="author-name">
+                    <strong >by <%= quiz.author.getFullName() %></strong>
+                </p>
+                
+            </h2>
+            <div class="tag-container">
+                <% for(let tag of quiz.tags){ %>
+                    <a 
+                    class="tag tag--<%= tag.name.toLowerCase() %>" 
+                    href="/tags/<%= tag.id %>">
+                    <%= tag.name %>
+                </a>
+                
+                <% } %>
+            </div>
+            <p class="quiz-info">
+                <strong><%= quiz.questions.length %> question(s)</strong>
+            </p>
+        </div>
+    </header>
+          
+    <div class="container bg-white question-container">
+
+          <form action="/quiz/<%= quiz.id %>" method="post">
+        <% if (locals.quiz) { %>
+                <% let index = 1 %> 
+                <% for(let question of quiz.questions){ %>
+                    <article class="col-question">
+                        <header class="question-infos">
+                            <strong>Question <%= index %></strong> <strong class ="level level--<%= question.level.name.toLowerCase() %>"><%= question.level.name %> </strong>
+                        </header>
+                        <p class="question"><%= question.question %> </p>
+                        <div class="answer-block">
+                            <% for(let answer of question.answers){ %>
+                                    <label 
+                                        class="choice" 
+                                        for="question<%= question.id%>answer<%= answer.id %>">
+                                        <input 
+                                            type="radio" 
+                                            name="question<%= question.id %>" id="question<%= question.id%>answer<%= answer.id %>" 
+                                            value="<%= answer.description %>">
+                                        <%= answer.description %> 
+                                    </label>
+                            
+                            <% } %>
+            
+                        </div><%# /div.answers %> 
+                    </article><%# /.col-question %> 
+                    <hr/>
+                    <% index++ %> 
+                <% } %><%# /for(let question of questions)%> 
+        <% } %>
+        <div class="form-group">
+            <button type="submit" class="btn">Valider ce quizz</button>
+        </div>
+        </form>
+       
+    </div>
+<%- include('partials/footer') %>

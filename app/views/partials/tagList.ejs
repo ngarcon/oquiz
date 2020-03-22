@@ -1,0 +1,13 @@
+<div class="container bg-white">
+    <div class="row">
+        <% if (locals.tags)  {%> 
+            
+            <div class="tag-lg__container">
+                <% for(let tag of tags){ %>
+                        <h3><a href="/tags/<%= tag.id %> " class="tag tag-lg tag--<%= tag.name.toLowerCase() %>"><%= tag.name %></a></h3>                
+                <% } %>
+            </div>
+        <% } %>
+
+    </div>
+</div> <%# /div.row %> 

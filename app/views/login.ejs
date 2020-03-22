@@ -1,0 +1,35 @@
+<%- include('partials/header') %>
+
+
+<div class="login-container">
+<h2>Se connecter</h2>
+<div class="errorList">
+    <ul>
+        <% if (locals.error) { %>
+                <li><%= error %></li>
+        <% } %>
+    </ul>
+</div>
+    <form action="/login" method="POST">
+        
+        <div class="form-row">
+            <label for="email">Votre email: </label>
+            <input type="email" name="email" id="email">
+        </div>
+
+        <div class="form-row">
+            <label for="password">Votre mot de passe :</label>
+            <input type="password" name="password" id="password">
+        </div>
+
+        <div class="form-row">
+            <input type="submit" name="confirm" id="confirm" value="Valider le formulaire">
+        </div>
+
+    
+    </form>
+</div>
+
+
+
+<%- include('partials/footer') %>

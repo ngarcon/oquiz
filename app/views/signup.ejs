@@ -1,0 +1,50 @@
+<%- include('partials/header') %>
+
+<h2>Inscription</h2>
+
+<div class="signup-container">
+    <div class="errorList">
+        <ul>
+            <% if (locals.errorList) { %>
+                <% for(let error of errorList){ %>
+                    <li><%= error %></li>
+                <% } %>
+            <% } %>
+        </ul>
+    </div>
+    <form action="/signup" method="POST">
+
+        <div class="form-row">
+            <label for="firstname">Votre prénom</label>
+            <input type="text" name="firstname" id="firstname">
+        </div>
+
+        <div class="form-row">
+            <label for="lastname">Votre nom </label>
+            <input type="text" name="lastname" id="lastname">
+        </div>
+
+        <div class="form-row">
+            <label for="email">Votre email</label>
+            <input type="email" name="email" id="email">
+        </div>
+
+        <div class="form-row">
+            <label for="passwordChoice">Choisissez un mot de passe</label>
+            <input type="password" name="passwordChoice" id="passwordChoice">
+        </div>
+
+        <div class="form-row">
+            <label for="passwordConfirm">Confirmer votre mot de passe</label>
+            <input type="password" name="passwordConfirm" id="passwordConfirm">
+        </div>
+        
+        <div class="form-row">
+            <input type="submit" name="confirm" id="confirm" value="Valider le formulaire">
+        </div>
+    </form>
+</div>
+
+
+
+<%- include('partials/footer') %>
